@@ -1,0 +1,120 @@
+aid: kraken-technologies
+url: https://raw.githubusercontent.com/api-evangelist/kraken-technologies/refs/heads/main/apis.yml
+name: Kraken Technologies
+kind: company
+description: >-
+  Kraken Technologies is the United Kingdom energy technology company behind Kraken, the licensed
+  cloud operating system for utilities. Founded in 2016 inside Octopus Energy and spun out as an
+  independent business, Kraken says it supports more than 90 million customer accounts for licensees
+  including E.ON Next, EDF, Origin, Tokyo Gas, National Grid, Good Energy, Plenitude, Energy
+  Queensland, Essential Energy, Portsmouth Water and TalkTalk across electricity, gas, water and
+  broadband. It sits one layer behind the utility rather than in front of the consumer: it does not
+  hold a supply licence, does not settle in the wholesale market and does not publish grid or market
+  data, so the retailers and networks it powers carry the regulatory obligations, not Kraken. Its API
+  posture matches that position and is honestly closed. The Open Kraken programme publicly advertises
+  APIs, events, embedded apps, Flow automation and an MCP-based AI access layer, but every reference
+  surface is gated: docs.kraken.tech forces SSO login on every path, no base URL or endpoint is
+  published anywhere, the Tako design-system package requires a private npm token issued by email,
+  and the Marketplace runs under signed access-and-use terms. There is no self-serve developer
+  signup, no consumer data-portability API of its own, and no open market data.
+image: https://www.kraken.tech/favicon-96x96.png
+tags:
+- Energy
+- United Kingdom
+- Utilities
+- Electricity
+- Gas
+- Smart Metering
+- Demand Response
+- DER
+- Billing
+- Energy Platform
+created: '2026-07-27'
+modified: '2026-07-27'
+specificationVersion: '0.19'
+apis:
+- aid: kraken-technologies:open-kraken-apis-and-events
+  name: Open Kraken APIs and Events
+  description: >-
+    Open Kraken is the integration layer of the Kraken utility operating system. Kraken publicly
+    describes it as "APIs, events and MCP" for building apps and experiences against data and
+    capabilities inside Kraken and for bringing data in from a licensee's own apps and third-party
+    tools, alongside the Flow drag-and-drop automation tool and Embedded Apps that render inside the
+    Kraken agent desktop. No base URL, endpoint list, authentication scheme or machine-readable
+    contract is published anywhere on the public web. The reference documentation at
+    docs.kraken.tech returns an SSO login wall on every path probed on 2026-07-27, including
+    /openapi.json, /llms.txt and /.well-known/openid-configuration, each of which redirects to
+    /auth/login/ and serves text/html rather than a spec. Access is available only to Kraken
+    licensees and contracted partners.
+  humanURL: https://www.kraken.tech/open-kraken
+  tags:
+  - Energy
+  - Utilities
+  - Integration
+  - Events
+  - Embedded Apps
+  properties:
+  - type: Documentation
+    url: https://www.kraken.tech/open-kraken
+  - type: Documentation
+    url: https://docs.kraken.tech/
+  - type: ChangeLog
+    url: https://www.kraken.tech/product-updates
+- aid: kraken-technologies:open-kraken-ai-access-layer-mcp
+  name: Open Kraken AI Access Layer (MCP)
+  description: >-
+    An AI access layer that Kraken announced as an expansion of Open Kraken, built using the Model
+    Context Protocol and described as MCP gateways that let a utility's own AI agents orchestrate
+    approved actions across Kraken, with fair use included. Kraken states the layer is being
+    gradually released. No MCP server URL, tool list, scope model or transport is published; a probe
+    of mcp.kraken.tech on 2026-07-27 did not resolve. MCP is the only protocol Kraken names for this
+    surface, and it is an agent-integration protocol rather than an energy data standard.
+  humanURL: https://www.kraken.tech/open-kraken
+  tags:
+  - Energy
+  - MCP
+  - AI Agents
+  - Utilities
+  properties:
+  - type: Documentation
+    url: https://www.kraken.tech/open-kraken
+  - type: Announcement
+    url: https://www.kraken.tech/press-releases/kraken-expands-open-kraken-with-ai-access-layer-and-marketplace
+  - type: Documentation
+    url: https://docs.kraken.tech/
+common:
+- type: Website
+  url: https://www.kraken.tech/
+- type: Documentation
+  url: https://docs.kraken.tech/
+- type: DesignSystem
+  url: https://tako.kraken.tech/
+- type: SDK
+  url: https://github.com/kraken-tech/kraken-apps-examples
+- type: GitHubOrganization
+  url: https://github.com/kraken-tech
+- type: GitHubOrganization
+  url: https://github.com/octoenergy
+- type: LinkedIn
+  url: https://www.linkedin.com/company/krakentech/
+- type: Blog
+  url: https://www.kraken.tech/insights
+- type: PressReleases
+  url: https://www.kraken.tech/press-releases
+- type: ChangeLog
+  url: https://www.kraken.tech/product-updates
+- type: Partners
+  url: https://www.kraken.tech/marketplace
+- type: PartnerProgram
+  url: https://www.kraken.tech/bpo-partner-program
+- type: VulnerabilityDisclosure
+  url: https://www.kraken.tech/vulnerability-disclosure-process
+- type: TrustCenter
+  url: https://www.kraken.tech/legal/trust-center
+- type: TermsOfService
+  url: https://www.kraken.tech/legal/marketplace-access-and-use-terms
+- type: PrivacyPolicy
+  url: https://www.kraken.tech/legal/privacy-notice
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

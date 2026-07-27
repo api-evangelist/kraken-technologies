@@ -1,0 +1,340 @@
+aid: kraken-technologies
+name: Kraken Technologies
+review:
+  question: >-
+    Does Kraken Technologies publish a real, publicly reachable developer or API surface, and does any
+    energy data mandate attach to the organization itself?
+  answer: false
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  homeMarket: United Kingdom
+  tier: energy-data-platform
+  primaryDomain: kraken.tech
+  outcome: >-
+    Identity captured. No public developer portal, no machine-readable contract, no published base
+    URL. Everything Kraken calls Open Kraken is real as a product but gated behind a licensee SSO
+    wall. No mandate attaches to Kraken itself; it is an unregulated software vendor whose licensees
+    carry the obligations.
+
+mandate:
+  regime: none
+  status: not-applicable
+  verbatim: >-
+    Kraken Technologies is a technology vendor, not a licensed energy supplier, network operator or
+    accredited data recipient. The obligations that shape this sector attach to its customers, not to
+    it. In Great Britain the Smart Energy Code and the licensed Data Communications Company monopoly
+    bind energy suppliers and network operators; Elexon's Balancing and Settlement Code binds BSC
+    parties; the Ofgem supply licence binds retailers. Kraken holds none of these roles in its own
+    name. Britain also has no consumer data-portability mandate equivalent to the Australian Consumer
+    Data Right, so even Kraken's UK licensees are under an infrastructure mandate, not a data right.
+  whyNotSmartMeterInfrastructure: >-
+    The `smart-meter-infrastructure` regime was considered and rejected for THIS organization. The
+    DCC/SEC obligation is a licence condition on suppliers and networks. Kraken builds the systems
+    those parties use to meet it, but the duty is theirs. Recording Kraken as covered by the regime
+    would let a customer's obligation imply a vendor's compliance, which is exactly the conflation
+    this review is meant to prevent.
+  australianCdrCheck:
+    performed: true
+    date: '2026-07-27'
+    method: >-
+      Queried the public Consumer Data Right register endpoint
+      GET https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary with header x-v: 1.
+    httpStatus: 200
+    contentType: application/json
+    brandsReturned: 203
+    krakenBrandsFound: 0
+    finding: >-
+      Kraken Technologies does not appear in the Australian CDR register of data holder brands. Its
+      Australian licensees (Origin Energy, Energy Queensland/Ergon Energy, Essential Energy) carry
+      any CDR-energy obligation in their own names. Kraken is not a designated data holder and is not
+      an accredited data recipient.
+  claimsVsImplementation: >-
+    Kraken makes no public compliance claim about a consumer data API and no public claim to
+    implement Green Button, ESPI, the CDR Consumer Data Standards, or any other energy data standard.
+    There was therefore no claim to downgrade to `live-claimed-unverified`. The honest reading is
+    that no mandate applies and none is implemented.
+
+dataStandard:
+  energyStandardFound: false
+  value: no standard reference found
+  detail: >-
+    No mention of Green Button, ESPI, CDR Consumer Data Standards (energy), OCPP, OCPI, OpenADR,
+    IEEE 2030.5 or IEC CIM 61968/61970 was found on kraken.tech, in its sitemap of 155 English-language
+    pages, in the Open Kraken pages, or in the press release announcing the AI access layer. The only
+    protocol Kraken names publicly is MCP (Model Context Protocol), used for its AI access layer.
+    MCP is an agent-integration protocol, not an energy data standard. Kraken markets a proprietary
+    "single data model" for utilities; no schema for it is published.
+
+consumerVsMarketData:
+  consumerDataApi: false
+  consumerDataDetail: >-
+    Kraken publishes no API through which a third party can obtain an individual customer's usage or
+    billing data. Kraken is the processor sitting behind the utility; the customer relationship, and
+    any consumer-facing API, belongs to the licensee. The clearest example is Octopus Energy, whose
+    public developer portal at developer.octopus.energy exposes Kraken-backed REST and GraphQL
+    consumption, meter-point and tariff APIs — but that is Octopus's surface published under Octopus's
+    brand and supply licence, profiled separately in the API Evangelist network as `octopus-energy`.
+    Nothing equivalent exists under kraken.tech.
+  marketDataOpen: false
+  marketDataDetail: >-
+    Kraken publishes no open grid, market, settlement or emissions data. It is not a system operator,
+    market operator or network company. In its home market the genuinely open feeds belong to other
+    parties — NESO's Carbon Intensity API, Elexon's BMRS/Insights, and the DNO open-data portals —
+    none of which Kraken operates or republishes. Probes for data.kraken.tech returned no DNS
+    resolution.
+  theSplit: >-
+    Kraken is closed on both axes, which is the finding. The UK seam produces an unusually API-native
+    energy sector, but the API-native part lives at the retailer (Octopus) and at the system operator
+    (NESO), not at the platform vendor that licenses the software. Kraken's value is sold to
+    utilities, so its integration surface is priced and gated as part of a licence rather than
+    published.
+
+accessGate:
+  value: partner-only
+  gated: true
+  whatADeveloperMustDo: >-
+    There is no self-serve signup and no public application form for API access. A developer must be
+    working for, or contracted to, a Kraken licensee. Concretely: (1) the utility signs a Kraken
+    licence — the only public entry points on kraken.tech are "Request a demo", "Consult Kraken"
+    (disallowed in robots.txt) and the BPO Partner Program; (2) the developer is then issued SSO
+    credentials for docs.kraken.tech, which offers "Log in via SSO" plus an ad-hoc email/password
+    fallback and serves the login page for every path including /openapi.json and /robots.txt; (3)
+    to build Embedded Apps, the developer must email tako@kraken.tech to have a private-npm token
+    generated for the Tako design system, per the public kraken-apps-examples README; (4) Marketplace
+    use runs under separate signed access-and-use terms and a fair-use policy. Nothing in this chain
+    is obtainable anonymously.
+  publicSurfacesThatAreNotGated:
+  - https://www.kraken.tech/ (marketing)
+  - https://www.kraken.tech/open-kraken (marketing description of the integration layer)
+  - https://tako.kraken.tech/ (Tako design system documentation site, public; the npm package is not)
+  - https://github.com/kraken-tech/kraken-apps-examples (public example app; depends on token-gated Tako)
+
+authModel:
+  apiAuthScheme: not published
+  detail: >-
+    No API authentication scheme is documented publicly — no API key format, no OAuth2 flows, no
+    scopes, no mTLS profile, no CDR accreditation. The only auth surface observable anonymously is
+    the documentation portal's own login: docs.kraken.tech offers SSO ("Log in via SSO", form POST to
+    /auth/login/) with an ad-hoc email/password alternative at /auth/login/ad-hoc/. The portal is a
+    Django application. An anonymous fetch of https://docs.kraken.tech/.well-known/openid-configuration
+    returned HTTP 200 but with content-type text/html and a final URL of
+    /auth/login/?next=/.well-known/openid-configuration/ — it is the login page, not an OIDC discovery
+    document. No OIDC metadata is served anonymously on any Kraken host probed.
+  scopesFound: 0
+
+probes:
+  date: '2026-07-27'
+  note: HTTP status recorded for every URL probed. "final" is the URL after redirects.
+  results:
+  - url: https://kraken.tech/
+    status: 200
+    final: https://www.kraken.tech/
+  - url: https://www.kraken.tech/robots.txt
+    status: 200
+    note: 'Allow: / with Disallow: /admin/, /api/, /consult-kraken/. Sitemap declared.'
+  - url: https://www.kraken.tech/sitemap.xml
+    status: 200
+    note: 155 English-language URLs harvested; no developer, docs, api or data path present.
+  - url: https://developer.kraken.tech/
+    status: 000
+    note: DNS does not resolve.
+  - url: https://developers.kraken.tech/
+    status: 000
+    note: DNS does not resolve.
+  - url: https://api.kraken.tech/
+    status: 000
+    note: DNS does not resolve.
+  - url: https://data.kraken.tech/
+    status: 000
+    note: DNS does not resolve.
+  - url: https://mcp.kraken.tech/
+    status: 000
+    note: DNS does not resolve, despite MCP being the named AI access layer protocol.
+  - url: https://apps.kraken.tech/
+    status: 000
+    note: DNS does not resolve.
+  - url: https://partners.kraken.tech/
+    status: 000
+    note: DNS does not resolve.
+  - url: https://status.kraken.tech/
+    status: 000
+    note: DNS does not resolve; no public status page found.
+  - url: https://docs.kraken.tech/
+    status: 200
+    final: https://docs.kraken.tech/auth/login/?next=/
+    note: '"Kraken Docs" login wall. SSO button plus email/password fallback. Django app.'
+  - url: https://docs.kraken.tech/openapi.json
+    status: 200
+    final: https://docs.kraken.tech/auth/login/?next=/openapi.json/
+    contentType: text/html; charset=utf-8
+    note: NOT a spec. Login page. 9317 bytes of HTML.
+  - url: https://docs.kraken.tech/.well-known/openid-configuration
+    status: 200
+    final: https://docs.kraken.tech/auth/login/?next=/.well-known/openid-configuration/
+    contentType: text/html; charset=utf-8
+    note: NOT OIDC metadata. Login page.
+  - url: https://docs.kraken.tech/robots.txt
+    status: 200
+    contentType: text/html; charset=utf-8
+    note: Login page even for robots.txt — the portal is gated at every path.
+  - url: https://docs.kraken.tech/llms.txt
+    status: 200
+    contentType: text/html; charset=utf-8
+    note: Login page.
+  - url: https://www.kraken.tech/openapi.json
+    status: 404
+  - url: https://www.kraken.tech/swagger.json
+    status: 404
+  - url: https://www.kraken.tech/api-docs
+    status: 404
+  - url: https://www.kraken.tech/api
+    status: 404
+  - url: https://www.kraken.tech/docs
+    status: 404
+  - url: https://www.kraken.tech/developers
+    status: 404
+  - url: https://www.kraken.tech/llms.txt
+    status: 404
+  - url: https://www.kraken.tech/.well-known/openid-configuration
+    status: 404
+  - url: https://www.kraken.tech/.well-known/ai-plugin.json
+    status: 404
+  - url: https://www.kraken.tech/.well-known/security.txt
+    status: 404
+    note: No security.txt despite a published vulnerability disclosure process page.
+  - url: https://www.kraken.tech/open-kraken
+    status: 200
+    note: Marketing description of Embedded Apps, Flow, APIs/events and the MCP AI access layer.
+  - url: https://www.kraken.tech/marketplace
+    status: 200
+  - url: https://www.kraken.tech/bpo-partner-program
+    status: 200
+  - url: https://www.kraken.tech/vulnerability-disclosure-process
+    status: 200
+  - url: https://www.kraken.tech/legal/trust-center
+    status: 200
+  - url: https://www.kraken.tech/legal/security
+    status: 200
+    note: Contains no certifications, no auth statements, no API security detail — legal links only.
+  - url: https://tako.kraken.tech/
+    status: 200
+    note: >-
+      Public "Tako Design System" site, no login. DNS CNAME resolves to octoenergy.github.io,
+      confirming the octoenergy GitHub org is Kraken's. The npm package itself is private.
+  - url: https://support.kraken.tech/
+    status: 200
+    note: Pylon-hosted support portal shell; not a developer portal.
+  - url: https://github.com/kraken-tech
+    status: 200
+    note: 'GitHub org "Kraken Tech", blog kraken.tech, 15 public repos — Python/Django tooling plus kraken-apps-examples. No OpenAPI, AsyncAPI or GraphQL schema.'
+  - url: https://github.com/octoenergy
+    status: 200
+    note: 'GitHub org named "Kraken Technologies", blog kraken.tech, 58 public repos — xocto, public-conventions, octotools. No API contracts.'
+  - url: https://github.com/kraken-tech/kraken-apps-examples
+    status: 200
+    note: >-
+      Public example repo for Kraken Embedded Apps. README states Tako "requires an access token
+      since it is fetched from Kraken's private NPM registry" and to email tako@kraken.tech. The
+      api/server.js in the repo is a local mock, not a Kraken endpoint.
+  - url: https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+    status: 200
+    note: Australian CDR register queried for evidence; 203 brands returned, zero Kraken entries.
+  - url: https://www.linkedin.com/company/krakentech/
+    status: 999
+    note: LinkedIn anti-bot response. URL taken verbatim from the kraken.tech footer.
+
+findings:
+  summary: >-
+    Kraken Technologies is the clearest case in this sector of a mandate belonging to somebody else.
+    Britain mandated infrastructure — the licensed DCC monopoly, the Elexon settlement code — and did
+    not mandate a consumer data right. Kraken sits behind every one of those obligations as the
+    software its licensees run, and carries none of them itself. It is not in the Australian CDR
+    register even though three of its licensees operate in Australia. It implements no named energy
+    data standard. It publishes no open market data and no consumer data API. Its Open Kraken
+    integration layer is real and actively marketed — APIs, events, Embedded Apps, Flow, and an
+    MCP-based AI access layer being gradually released — but not one endpoint, base URL, scope or
+    machine-readable contract exists on the public web, and docs.kraken.tech returns a login page for
+    every path including /robots.txt. The UK's API-native reputation in energy is earned by Octopus
+    Energy and NESO, not by the platform vendor underneath them.
+  developerPortal:
+    url: https://docs.kraken.tech/
+    confirmed: false
+    reason: >-
+      Reachable but not a real self-serve portal. Every path redirects to /auth/login/. Access
+      requires credentials issued to a licensee. Recorded as portal_confirmed=false.
+  specsHarvested: 0
+  openapiDirectoryCreated: false
+  apisListed: 2
+  apiFamilyAsKrakenSegmentsIt:
+  - Kraken Customer — customer management, billing and payments, cash collection
+  - Kraken Field — field job scheduling and routing
+  - Kraken Distribution — network and distribution management, network billing, settlement flows
+  - Kraken Residential Flexibility — DER scheduling, demand response, tariff optimisation
+  - Kraken Generation Flexibility / Asset Optimization — battery and generation portfolio trading
+  - Kraken Configuration and CI/CD — tenant configuration and deployment tooling
+  - Open Kraken — Embedded Apps, Flow, APIs and events, MCP AI access layer, Marketplace
+  companyFacts:
+    founded: 2016, inside Octopus Energy
+    independence: Spun out of Octopus Energy Group as an independent business
+    employees: over 2,000 (company statement)
+    customerAccountsSupported: over 90 million (company statement)
+    sectors: electricity, gas, water, broadband
+    namedLicensees:
+    - E.ON Next
+    - EDF
+    - Origin Energy
+    - Tokyo Gas
+    - National Grid
+    - Good Energy
+    - Plenitude
+    - Energy Queensland / Ergon Energy
+    - Essential Energy
+    - Portsmouth Water
+    - TalkTalk
+    - Saint John Energy
+    - Norlys
+    - Maingau
+  homonymTrap: >-
+    "Kraken" collides with the Kraken cryptocurrency exchange (kraken.com, docs.kraken.com) and with
+    the KrakenD API gateway (krakend.io). Both surfaced ahead of kraken.tech in web search and both
+    publish real APIs and MCP servers. None of their artifacts were used. Every URL recorded here is
+    on kraken.tech, tako.kraken.tech, docs.kraken.tech, or a GitHub org whose declared website is
+    kraken.tech.
+  notInScope: >-
+    developer.octopus.energy is Kraken-powered but is Octopus Energy's published surface under its own
+    brand and supply licence. It is profiled separately as all/octopus-energy and none of its specs
+    were copied here.
+
+sources:
+- url: https://www.kraken.tech/
+  type: Website
+  note: Meta description — "the tech platform delivering innovation for utilities worldwide... over 90 million customer accounts".
+- url: https://www.kraken.tech/about
+  type: Documentation
+  note: Founded 2016 as part of Octopus Energy; now fully independent; 2,000+ employees; 90m+ customers; E.ON Next, EDF, Origin, Tokyo Gas.
+- url: https://www.kraken.tech/what-is-kraken
+  type: Documentation
+  note: Product modules. No mention of APIs, data standards, smart metering, DCC or market messaging on this page.
+- url: https://www.kraken.tech/open-kraken
+  type: Documentation
+  note: '"APIs, events and MCP"; Flow; Embedded Apps; AI access layer "built using MCP (fair use included)"; entry point is "Request a demo".'
+- url: https://www.kraken.tech/press-releases/kraken-expands-open-kraken-with-ai-access-layer-and-marketplace
+  type: Announcement
+  note: Adds an AI access layer with MCP gateways and the Kraken Marketplace to Embedded Apps, Flows, APIs and events; "gradually released"; no access mechanism given.
+- url: https://github.com/kraken-tech/kraken-apps-examples
+  type: SDK
+  note: Embedded Apps example. Tako requires a private-npm access token obtained by emailing tako@kraken.tech.
+- url: https://docs.kraken.tech/
+  type: Documentation
+  note: SSO-gated documentation hub. Not anonymously readable at any path.
+- url: https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+  type: Reference
+  note: Australian CDR register; used as negative evidence that Kraken is not a designated data holder.
+
+actions:
+  apisYmlCreated: true
+  readmeCreated: true
+  openapiHarvested: false
+  reason: >-
+    No machine-readable contract of any kind was obtainable anonymously. The openapi/ directory was
+    deliberately omitted rather than populated with anything derived, inferred or reconstructed.
