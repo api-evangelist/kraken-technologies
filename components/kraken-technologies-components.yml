@@ -1,0 +1,74 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://tako.kraken.tech/, https://tako-react-kraken-tech.vercel.app/index.json (200, 354 entries),
+  https://tako-html-kraken-tech.vercel.app/index.json (200, 231 entries), retrieved 2026-07-27
+summary: >-
+  Tako is Kraken's design system and the one genuinely rich developer artifact Kraken publishes
+  anonymously. Two libraries ship: Tako React (@krakentech/tako) and Tako HTML
+  (@krakentech/tako-html). The documentation, component inventory and release notes are public
+  Storybooks; the npm packages themselves are served from Kraken's private registry and require a
+  read-only token issued by Kraken. Components are used to build Kraken Embedded Apps that render
+  inside the Kraken agent desktop.
+docs: https://tako.kraken.tech/
+figma: https://www.figma.com/design/m3Rmpouk7CUAAG6FhJNeRk/Tako-Design-System-%F0%9F%8C%88
+contact: tako@kraken.tech
+access:
+  packages_public: false
+  docs_public: true
+  token: >-
+    Read-only access token from the Kraken Support team via your Client Delivery Lead or
+    tako@kraken.tech. Tokens expire annually, are rotated for security, and new tokens are
+    distributed a week before expiry.
+families:
+- family: Tako React
+  package: '@krakentech/tako'
+  version_seen: 27.20.0
+  tech: React + TypeScript + styled-components
+  storybook: https://tako-react-kraken-tech.vercel.app/?path=/docs/components
+  introduction: https://tako-react-kraken-tech.vercel.app/?path=/docs/tako-react-introduction--docs
+  story_entries: 354
+  component_count: 50
+  components: [Accordion, AccordionContent, AccordionHeader, Alert, Breadcrumbs, Breadcrumbs.Link,
+    Breadcrumbs.Text, Button, Card, CardContent, CardFooter, CardHeader, Checkbox, CopyToClipboard,
+    DatePicker, Dropdown, DropdownOption, FileInput, IconButton, IconContainer, InputGroup, Link,
+    LinkButton, List, Modal, Pagination/CursorPagination, Pagination/PagePagination, Popover,
+    RadioButtonGroup, Section, Select/AsyncSelect, Select/Select, Snackbar, TabGroup, Table,
+    TableBody, TableCell, TableHeader, TableHeaderCell, TableRow, Tag, TextArea, TextInput, Timeline,
+    ToggleButtonGroup, ToggleSwitch, Tooltip, TooltipText, TypeAhead, Typography]
+  layout: [Stack]
+  theme_docs: [Theme, Typography, breakpoints, SpacingTemplate, Colours]
+  migration_guides: [v16, v17, v18, v19, v20, v21, v22, v23]
+- family: Tako HTML
+  package: '@krakentech/tako-html'
+  version_seen: 4.18.0
+  tech: Vanilla JavaScript + jQuery + SCSS (HTMX-aware; select2 for selects; Popper for popovers)
+  storybook: https://tako-html-kraken-tech.vercel.app/?path=/docs/components
+  introduction: https://tako-html-kraken-tech.vercel.app/?path=/docs/tako-html-introduction--docs
+  story_entries: 231
+  component_count: 26
+  components: [Accordion, Alert, Breadcrumbs, Button, ButtonGroup, Card, Checkbox, Dropdown,
+    FileInput, Icon, InputGroup, Link, List, Modal, Pagination, Popover, RadioButtonGroup, Select,
+    TabGroup, Table, Tag, TextInput, Textarea, Timeline, ToggleSwitch, Tooltip]
+  integrations: [Chart.js]
+  theme_docs: [Overview, Breakpoints, Colors, Spacing, Typography]
+  migration_guides: [v3, v4]
+loader_libraries:
+- name: '@krakentech/tako'
+  how: npm dependency in the app bundle (private registry)
+  example: https://github.com/kraken-tech/kraken-apps-examples/blob/main/package.json
+- name: '@krakentech/tako-html'
+  how: npm dependency / SCSS + JS assets for server-rendered Kraken UIs
+embedding_surface:
+  name: Kraken Embedded Apps
+  description: >-
+    Apps built with Tako are mounted by the Kraken Apps framework into the Kraken agent desktop
+    (Supportsite) as full-page apps, account tabs or device tabs, inside an iframe with a CSP that
+    restricts connect-src to the Kraken App Proxy.
+  contract: conventions/kraken-technologies-conventions.yml
+  example_repo: https://github.com/kraken-tech/kraken-apps-examples
+agent_tooling:
+  mcp: mcp/kraken-technologies-mcp.yml
+  note: >-
+    Kraken publishes an MCP configuration so an IDE assistant can read the Tako Storybook docs while
+    you build components.

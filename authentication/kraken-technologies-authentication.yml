@@ -1,0 +1,91 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://github.com/kraken-tech/kraken-apps-examples (README + src/types/app.ts, retrieved
+  2026-07-27), https://www.kraken.tech/legal/trust-center, live probes of docs.kraken.tech
+docs: https://github.com/kraken-tech/kraken-apps-examples#the-kraken-apps-jwt
+summary:
+  types: [jwt-bearer, saml, sso]
+  api_key_in: []
+  oauth2_flows: []
+  openapi_derived: false
+  note: >-
+    There is no OpenAPI to derive securitySchemes from. Everything below was read from Kraken's own
+    public example repository and Trust Center. The Open Kraken REST/event API authentication scheme
+    is NOT published; the only concretely documented API auth mechanism is the Kraken Apps
+    (Embedded Apps) proxy JWT.
+schemes:
+- name: kraken-app-proxy-jwt
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  surface: Kraken Apps (Embedded Apps) → Kraken App Store Proxy
+  source: https://github.com/kraken-tech/kraken-apps-examples
+  description: >-
+    A Kraken Embedded App is handed a JWT (`appProxyJwt`) at initialisation by the Kraken Apps
+    framework. The app presents it on every request through the Kraken App Proxy, which validates it
+    and forwards it to the app's own backend. The token is the proof that the request originated
+    from a user logged into Kraken.
+  transport_headers:
+  - name: X-Kraken-App-Proxy-Authorization
+    value: 'Bearer <appProxyJwt>'
+    required: true
+  - name: X-Kraken-App-Proxy-Destination
+    value: '<destination host, e.g. external.com>'
+    required: true
+    note: The proxy has a single endpoint that forwards all requests to the declared destination.
+  proxy_url_form: '<APIProxyURL>/<your endpoint>  e.g. https://kraken-app-proxy.example.com/p/v1/example-app/external/endpoint/'
+  key_discovery:
+    jwks_uri_pattern: '<kraken-host>/.well-known/jwks.json'
+    kid: kraken-app-store
+    published_on: [Supportsite domain of each Kraken deployment, the APIs of each Kraken deployment]
+    verbatim: >-
+      "Each Kraken publishes its public key in the /.well-known/jwks.json endpoint, both in its
+      Supportsite domain, and its APIs. The public key has kid set to kraken-app-store."
+    probeable_anonymously: false
+    note: Per-tenant; Kraken publishes no tenant host list, so no JWKS document could be retrieved.
+  claims:
+  - {name: user_id, description: ID of the Support User in Kraken who made the request via the app}
+  - {name: user_email, description: Email address of the Support User}
+  - {name: iat, description: Issued-at time}
+  - {name: exp, description: Expiry — 25 hours after issue}
+  - {name: aud, description: Name of the app the request came from}
+  - {name: permissions, description: 'Kraken App specific permissions the user has — documented as "(soon)", not yet present'}
+  token_lifetime: 25h
+  scopes_published: 0
+- name: kraken-docs-sso
+  type: sso
+  surface: docs.kraken.tech (reference documentation portal)
+  description: >-
+    The documentation portal is a Django application that gates every path behind
+    /auth/login/?next=<path>. It offers "Log in via SSO" plus an ad-hoc email/password fallback at
+    /auth/login/ad-hoc/. Credentials are issued to licensees and contracted partners only.
+  probe:
+    date: '2026-07-27'
+    status: 302
+    location: '/auth/login/?next=/'
+    server: gunicorn
+    x_frame_options: DENY
+  anonymous_access: false
+- name: kraken-platform-idp-saml
+  type: saml
+  surface: Kraken Customer Platform (product sign-in, not the API)
+  source: https://www.kraken.tech/legal/trust-center
+  description: >-
+    "Integration with client identity providers (IdPs) supporting Security Assertion Markup Language
+    (SAML) for Kraken Customer Platform", with multi-factor authentication support across Kraken
+    access points and role-based access control with regular privileged-access audits.
+not_published:
+  oauth2: >-
+    No OAuth 2.0 authorization server, flows, client registration or scope model is published on any
+    public Kraken host. /.well-known/oauth-authorization-server and /.well-known/oauth-protected-
+    resource on docs.kraken.tech return the login page, not RFC 8414/9728 metadata.
+  openid_connect: >-
+    No anonymous OIDC discovery document is served. docs.kraken.tech/.well-known/openid-configuration
+    returns text/html (the login page) with HTTP 200.
+  api_keys: No API key format, header name or issuance process is documented publicly.
+  mutual_tls: >-
+    Not documented for API access. mTLS-style client certificates DO appear in Kraken's internal
+    toolchain (the public Homebrew formula passes HOMEBREW_SSL_CLIENT_CERT to Nexus), but that is
+    package distribution, not API authentication.
+  scopes: 0

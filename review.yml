@@ -338,3 +338,64 @@ actions:
   reason: >-
     No machine-readable contract of any kind was obtainable anonymously. The openapi/ directory was
     deliberately omitted rather than populated with anything derived, inferred or reconstructed.
+
+enrichmentRounds:
+- round: 2
+  date: '2026-07-27'
+  method: search / probe (no fabrication)
+  contractDiscoveryReRun:
+    verdict: still no machine-readable API contract
+    detail: >-
+      Re-probed every candidate host and path per the contract-discovery protocol: /openapi.json,
+      /swagger.json, /api-docs, /redoc, /graphql and /llms.txt on docs.kraken.tech (all HTTP 200 but
+      text/html — the SSO login page, 9.3KB), the same paths plus /.well-known/* on www.kraken.tech
+      (404) and tako.kraken.tech (404), and DNS for api, mcp, developer, developers, data, graph,
+      gateway, open, marketplace, status, app, apps, id, auth, login, sso, trust and security under
+      kraken.tech (all NXDOMAIN). No GraphQL introspection target and no hosted MCP endpoint exists
+      to POST tools/list to.
+  newFindings:
+  - >-
+    The Embedded Apps integration contract IS public, in github.com/kraken-tech/kraken-apps-examples:
+    the window.krakensupport init functions and their arguments (rootID, appSlug, basename,
+    APIProxyURL, appProxyJwt, defaultLanguage, user{...}, accountNumber, deviceID), the Kraken App
+    Store Proxy request shape (X-Kraken-App-Proxy-Destination and X-Kraken-App-Proxy-Authorization
+    headers, /p/v1/<app-slug>/ URL form), and the app JWT model.
+  - >-
+    Kraken publishes a JWKS discovery pattern — each Kraken deployment serves its public key at
+    /.well-known/jwks.json on both its Supportsite domain and its APIs, with kid "kraken-app-store";
+    tokens carry user_id, user_email, iat, exp, aud and (soon) permissions, and expire after 25
+    hours. Per-tenant, so not anonymously probeable, but it is a real published auth contract.
+  - >-
+    Tako, the design system, has two PUBLIC Storybooks with machine-readable indexes
+    (tako-react-kraken-tech.vercel.app/index.json, 354 entries / 50 component families;
+    tako-html-kraken-tech.vercel.app/index.json, 231 entries / 26 families) and public Changesets
+    release notes (@krakentech/tako 27.20.0, @krakentech/tako-html 4.18.0). The npm packages
+    themselves stay on Kraken's private registry.
+  - >-
+    Kraken publishes a real, anonymously usable MCP configuration — the community storybook-mcp
+    server pointed at the public Tako Storybook index — documented in the Tako Storybook itself. It
+    is a documentation server for the design system, unrelated to the announced Open Kraken AI
+    access layer, which remains unpublished.
+  - >-
+    A first-party CLI exists (kraken-cli 0.48.4, binaries kraken and kraken-credentials, plus ktdb)
+    in the PUBLIC Homebrew tap octoenergy/tap, but every formula downloads from nexus.ktl.net and
+    refuses to run unless Zscaler Private Access is connected. Internal platform tooling, not an API
+    CLI — recorded, but no CLI pointer wired.
+  - >-
+    The Trust Center names real certifications the round-1 pass had not captured: ISO/IEC 27001:2022,
+    SOC 1 Type 2 and SOC 2 Type 2 (published twice annually), GDPR alignment with a named DPO, and an
+    explicit delegation of PCI DSS to payment providers. The vulnerability disclosure page commits to
+    2-business-day first response and triage, and states a separate private HackerOne program with no
+    monetary rewards.
+  - >-
+    Ten first-party open-source Python libraries are published on PyPI (xocto, django-subatomic,
+    django-integrity, django-pg-migration-tools, django-consistency-enforcer, timezone-tools,
+    rustfluent, octotools, terraform-cloud-client, timeserio). None is an API client, so no SDKs
+    pointer was wired.
+  stillAbsent:
+  - OpenAPI / Swagger / GraphQL SDL / AsyncAPI / Protobuf
+  - Public base URL or endpoint list for Open Kraken
+  - OAuth 2.0 / OIDC metadata, scopes, or API keys
+  - security.txt (RFC 9116), despite a published disclosure process
+  - Public status page, SLA, deprecation policy or API changelog
+  - Hosted sandbox, error reference, rate-limit documentation, idempotency contract

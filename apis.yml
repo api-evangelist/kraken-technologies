@@ -60,6 +60,12 @@ apis:
     url: https://docs.kraken.tech/
   - type: ChangeLog
     url: https://www.kraken.tech/product-updates
+  - type: Authentication
+    url: authentication/kraken-technologies-authentication.yml
+  - type: Conventions
+    url: conventions/kraken-technologies-conventions.yml
+  - type: SourceCode
+    url: https://github.com/kraken-tech/kraken-apps-examples
 - aid: kraken-technologies:open-kraken-ai-access-layer-mcp
   name: Open Kraken AI Access Layer (MCP)
   description: >-
@@ -82,7 +88,33 @@ apis:
     url: https://www.kraken.tech/press-releases/kraken-expands-open-kraken-with-ai-access-layer-and-marketplace
   - type: Documentation
     url: https://docs.kraken.tech/
+  - type: MCPServer
+    url: mcp/kraken-technologies-mcp.yml
 common:
+- type: DomainSecurity
+  url: security/kraken-technologies-domain-security.yml
+- type: Authentication
+  url: authentication/kraken-technologies-authentication.yml
+- type: Conventions
+  url: conventions/kraken-technologies-conventions.yml
+- type: Components
+  url: components/kraken-technologies-components.yml
+- type: Packages
+  url: packages/kraken-technologies-packages.yml
+- type: MCPServer
+  url: mcp/kraken-technologies-mcp.yml
+- type: LLMsTxt
+  url: llms/kraken-technologies-llms.txt
+- type: Conformance
+  url: conformance/kraken-technologies-conformance.yml
+- type: Compliance
+  url: https://www.kraken.tech/legal/trust-center
+- type: Lifecycle
+  url: lifecycle/kraken-technologies-lifecycle.yml
+- type: ChangeLog
+  url: changelog/kraken-technologies-changelog.yml
+- type: Security
+  url: https://www.kraken.tech/vulnerability-disclosure-process
 - type: Website
   url: https://www.kraken.tech/
 - type: Documentation
@@ -109,8 +141,20 @@ common:
   url: https://www.kraken.tech/bpo-partner-program
 - type: VulnerabilityDisclosure
   url: https://www.kraken.tech/vulnerability-disclosure-process
+- type: VulnerabilityDisclosure
+  url: security/kraken-technologies-vulnerability-disclosure.yml
 - type: TrustCenter
   url: https://www.kraken.tech/legal/trust-center
+- type: TrustCenter
+  url: security/kraken-technologies-trust-center.yml
+- type: Support
+  url: https://support.kraken.tech/
+- type: Legal
+  url: https://www.kraken.tech/legal
+- type: Subprocessors
+  url: https://www.kraken.tech/legal/subprocessors
+- type: DataProcessingAgreement
+  url: https://www.kraken.tech/legal/dpa
 - type: TermsOfService
   url: https://www.kraken.tech/legal/marketplace-access-and-use-terms
 - type: PrivacyPolicy

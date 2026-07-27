@@ -1,0 +1,105 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://www.kraken.tech/legal/trust-center, https://github.com/kraken-tech/kraken-apps-examples,
+  https://tako-html-kraken-tech.vercel.app/?path=/docs/more-info-mcp--docs, live probes 2026-07-27
+summary: >-
+  Kraken conforms to real organisational security standards (ISO 27001, SOC 1/2, GDPR) and uses two
+  genuine technical standards on its public surface: JWT/JWKS for the Embedded Apps proxy and MCP for
+  the Tako documentation server (with an announced MCP-based AI access layer). It conforms to no
+  energy-sector data standard — no Green Button, ESPI, CDR Consumer Data Standards, OCPP, OCPI,
+  OpenADR, IEEE 2030.5 or IEC CIM reference exists anywhere on its public surface — and it publishes
+  no API-level conformance (no OpenAPI, no OAuth 2.0, no OIDC, no RFC 9457).
+standards:
+- id: iso-27001-2022
+  conforms: true
+  evidence: 'Trust Center: "Kraken holds ISO/IEC 27001:2022 certification and uses ISO27001 as the basis for our Information Security Management System."'
+  source: https://www.kraken.tech/legal/trust-center
+- id: soc2-type2
+  conforms: true
+  evidence: 'Trust Center: Kraken Customer and Kraken Flex maintain SOC 2 Type 2 attestations covering Security, Availability and Confidentiality; published twice annually.'
+  source: https://www.kraken.tech/legal/trust-center
+- id: soc1-type2
+  conforms: true
+  evidence: 'Trust Center: SOC 1 Type 2 attestation maintained alongside SOC 2 Type 2.'
+  source: https://www.kraken.tech/legal/trust-center
+- id: gdpr
+  conforms: true
+  evidence: 'Trust Center: alignment with GDPR as the business-wide standard; DPO appointed (dpo@kraken.tech); published DPA and subprocessor list with change notification.'
+  source: https://www.kraken.tech/legal/trust-center
+- id: pci-dss
+  conforms: false
+  evidence: >-
+    Kraken makes no PCI DSS certification claim for itself; card processing is delegated to payment
+    providers such as Stripe (PCI DSS Level 1) and "card details never touch Kraken's systems".
+  source: https://www.kraken.tech/legal/trust-center
+- id: rfc7519-jwt
+  conforms: true
+  evidence: 'Kraken Apps proxy tokens are JWTs with iat/exp/aud plus user_id and user_email claims, 25-hour lifetime.'
+  source: https://github.com/kraken-tech/kraken-apps-examples
+- id: rfc7517-jwks
+  conforms: true
+  evidence: 'Each Kraken deployment publishes its public key at /.well-known/jwks.json with kid "kraken-app-store", on both the Supportsite domain and its APIs.'
+  source: https://github.com/kraken-tech/kraken-apps-examples
+- id: saml-2.0
+  conforms: true
+  evidence: 'Trust Center: "Integration with client identity providers (IdPs) supporting Security Assertion Markup Language (SAML) for Kraken Customer Platform".'
+  source: https://www.kraken.tech/legal/trust-center
+- id: model-context-protocol
+  conforms: partial
+  evidence: >-
+    Kraken publishes a working MCP client configuration for its Tako Storybook documentation
+    (stdio, npx storybook-mcp, public index.json) and has announced an MCP-based AI access layer for
+    Open Kraken that is not yet published.
+  source: mcp/kraken-technologies-mcp.yml
+- id: tls-1.2-plus
+  conforms: true
+  evidence: >-
+    Trust Center mandates TLS 1.2+ for client data in transit; probes show TLS 1.3 on www.kraken.tech
+    and tako.kraken.tech and TLS 1.2 on docs.kraken.tech.
+  source: security/kraken-technologies-domain-security.yml
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: 'No /.well-known/security.txt on any Kraken host (404 on www.kraken.tech; login page on docs.kraken.tech), despite a published disclosure process.'
+- id: openapi
+  conforms: false
+  evidence: 'No OpenAPI/Swagger document served anonymously on any Kraken host; docs.kraken.tech returns the SSO login page for /openapi.json and /swagger.json.'
+- id: graphql
+  conforms: false
+  evidence: 'No public /graphql endpoint; docs.kraken.tech/graphql returns the login page. (Kraken-powered GraphQL exists at Octopus Energy, under Octopus''s brand — out of scope.)'
+- id: asyncapi
+  conforms: false
+  evidence: 'Open Kraken advertises "events" but publishes no AsyncAPI document, event catalog or webhook reference.'
+- id: oauth2
+  conforms: false
+  evidence: 'No OAuth 2.0 flows, scopes or authorization-server metadata published; /.well-known/oauth-authorization-server returns the login page.'
+- id: openid-connect
+  conforms: false
+  evidence: 'No anonymous OIDC discovery document; /.well-known/openid-configuration returns text/html (the login page) with HTTP 200.'
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'No error reference or problem-details media type published.'
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: 'No deprecation policy or Sunset header support published.'
+- id: green-button-espi
+  conforms: false
+  evidence: 'No reference on kraken.tech, in its 155-page sitemap, or in Open Kraken material (re-verified 2026-07-27).'
+- id: cdr-consumer-data-standards-energy
+  conforms: false
+  evidence: >-
+    Kraken does not appear in the Australian CDR register of data-holder brands (203 brands returned,
+    zero Kraken entries); its Australian licensees carry the obligation in their own names.
+  source: https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+- id: ocpp
+  conforms: false
+- id: ocpi
+  conforms: false
+- id: openadr
+  conforms: false
+- id: ieee-2030.5
+  conforms: false
+- id: iec-cim-61968-61970
+  conforms: false
+compliance_program_published: true
+compliance_page: https://www.kraken.tech/legal/trust-center

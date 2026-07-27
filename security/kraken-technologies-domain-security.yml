@@ -1,0 +1,37 @@
+generated: '2026-07-27'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts, plus manual host probes of docs.kraken.tech and tako.kraken.tech (2026-07-27)
+hosts:
+- host: www.kraken.tech
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 19 20:15:03 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+- host: docs.kraken.tech
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Feb 27 23:59:59 2027 GMT
+  hsts: false
+  server: gunicorn
+  x_frame_options: DENY
+  note: >-
+    Documentation portal (Django). Manually probed 2026-07-27 — not covered by the automated pass
+    because it is not an apis.yml baseURL. Negotiates TLS 1.2 (no TLS 1.3) and sends no
+    Strict-Transport-Security header, which is weaker than the marketing host.
+- host: tako.kraken.tech
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 11 14:37:21 2026 GMT
+  hsts: false
+  server: GitHub.com
+  note: >-
+    Tako design-system docs, served by GitHub Pages (CNAME to octoenergy.github.io). Manually probed
+    2026-07-27. No HSTS header.
+domains:
+- domain: kraken.tech
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

@@ -1,0 +1,77 @@
+generated: '2026-07-27'
+method: searched
+source: live HTTP probes, 2026-07-27
+summary: >-
+  No /.well-known/ discovery document is served anonymously on any Kraken Technologies host. The
+  marketing host (www.kraken.tech, Next.js) 404s every path. The documentation host
+  (docs.kraken.tech, Django/gunicorn) answers 200 for every path but the body is always the SSO
+  login page (text/html), including /.well-known/openid-configuration,
+  /.well-known/oauth-authorization-server and /.well-known/oauth-protected-resource — these are NOT
+  discovery documents. No raw files were saved because none were retrieved. No `WellKnown` or
+  `SecurityTxt` pointer is wired into apis.yml, because no such document exists.
+documents_retrieved: 0
+hosts:
+- host: https://www.kraken.tech
+  documents:
+  - {path: /.well-known/security.txt, status: 404, content_type: text/html}
+  - {path: /.well-known/openid-configuration, status: 404, content_type: text/html}
+  - {path: /.well-known/oauth-authorization-server, status: 404, content_type: text/html}
+  - {path: /.well-known/api-catalog, status: 404, content_type: text/html}
+  - {path: /.well-known/ai-plugin.json, status: 404, content_type: text/html}
+  - {path: /llms.txt, status: 404, content_type: text/html}
+- host: https://docs.kraken.tech
+  gated: true
+  gate: 'every path 302s to /auth/login/?next=<path> and returns the login page as text/html'
+  documents:
+  - {path: /.well-known/security.txt, status: 200, content_type: text/html, real_document: false,
+     final: 'https://docs.kraken.tech/auth/login/?next=/.well-known/security.txt/'}
+  - {path: /.well-known/openid-configuration, status: 200, content_type: text/html, real_document: false,
+     final: 'https://docs.kraken.tech/auth/login/?next=/.well-known/openid-configuration/'}
+  - {path: /.well-known/oauth-authorization-server, status: 200, content_type: text/html, real_document: false,
+     final: 'https://docs.kraken.tech/auth/login/?next=/.well-known/oauth-authorization-server/'}
+  - {path: /.well-known/oauth-protected-resource, status: 200, content_type: text/html, real_document: false,
+     final: 'https://docs.kraken.tech/auth/login/?next=/.well-known/oauth-protected-resource/'}
+  - {path: /openapi.json, status: 200, content_type: text/html, real_document: false, size: 9317}
+  - {path: /swagger.json, status: 200, content_type: text/html, real_document: false, size: 9317}
+  - {path: /api-docs, status: 200, content_type: text/html, real_document: false}
+  - {path: /redoc, status: 200, content_type: text/html, real_document: false}
+  - {path: /graphql, status: 200, content_type: text/html, real_document: false}
+  - {path: /llms.txt, status: 200, content_type: text/html, real_document: false}
+- host: https://tako.kraken.tech
+  note: GitHub Pages site for the Tako design system.
+  documents:
+  - {path: /openapi.json, status: 404, content_type: text/html}
+  - {path: /llms.txt, status: 404, content_type: text/html}
+  - {path: /sitemap.xml, status: 404, content_type: text/html}
+documented_but_unprobeable:
+- path: /.well-known/jwks.json
+  status: not-probeable-anonymously
+  documented_at: https://github.com/kraken-tech/kraken-apps-examples#the-kraken-apps-jwt
+  verbatim: >-
+    "Each Kraken publishes its public key in the /.well-known/jwks.json endpoint, both in its
+    Supportsite domain, and its APIs. The public key has kid set to kraken-app-store."
+  note: >-
+    This is a REAL documented discovery endpoint, but it lives on each licensee's own Kraken
+    deployment (a per-tenant Supportsite/API host), not on any kraken.tech host. Kraken publishes no
+    tenant host list, so it cannot be probed anonymously and no JWKS document was retrieved. It is
+    recorded here as evidence of the platform's auth discovery pattern only — see
+    authentication/kraken-technologies-authentication.yml.
+dns_no_resolution:
+- api.kraken.tech
+- mcp.kraken.tech
+- developer.kraken.tech
+- developers.kraken.tech
+- data.kraken.tech
+- graph.kraken.tech
+- gateway.kraken.tech
+- open.kraken.tech
+- marketplace.kraken.tech
+- status.kraken.tech
+- app.kraken.tech
+- apps.kraken.tech
+- id.kraken.tech
+- auth.kraken.tech
+- login.kraken.tech
+- sso.kraken.tech
+- trust.kraken.tech
+- security.kraken.tech

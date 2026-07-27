@@ -1,0 +1,104 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://github.com/kraken-tech/kraken-apps-examples (README + src/types/app.ts + src/main.jsx,
+  retrieved 2026-07-27), https://tako.kraken.tech/, https://www.kraken.tech/legal/trust-center
+summary: >-
+  Kraken publishes no REST API convention documentation — no base URL, no pagination contract, no
+  error envelope, no rate-limit headers, no idempotency key. The one cross-cutting request/response
+  contract that IS public is the Kraken Apps (Embedded Apps) integration contract: how an app is
+  initialised inside the Kraken agent desktop, and how it must call out through the Kraken App Store
+  Proxy. That contract is captured verbatim below. No `Idempotency` pointer is wired into apis.yml
+  because Kraken documents no idempotency mechanism.
+authentication:
+  style: JWT bearer, issued by the Kraken Apps framework and validated by the Kraken App Proxy
+  detail: authentication/kraken-technologies-authentication.yml
+embedded_app_contract:
+  initialisation:
+    global: window.krakensupport
+    functions_by_placement:
+    - {placement: full-page, function: initSinglePageApp, description: App added to the Kraken Supportsite as a new page}
+    - {placement: account-tab, function: 'account app init (see src/main.jsx)', description: New tab on the account page, additionally receives accountNumber}
+    - {placement: account-device, function: 'device app init (see src/main.jsx)', description: New tab on the device page, additionally receives deviceID}
+    arguments_all_apps:
+    - {name: rootID, description: ID of the element on the page where the app should mount itself}
+    - {name: appSlug, description: Slugified name of the app}
+    - {name: basename, description: 'Relative URL path where the app is mounted, e.g. /client-app/my-app'}
+    - {name: APIProxyURL, description: URL of the Kraken API proxy — the only host the app may make network requests to}
+    - {name: appProxyJwt, description: JWT the app uses to authenticate with the proxy; forwarded to the app backend}
+    - {name: defaultLanguage, description: 'Language the user is using in Kraken, passed to i18next changeLanguage'}
+    - {name: linkBaseRoute, description: Base route for links, distinct from basename because apps are hosted in iframes}
+    - {name: isLoginRequired, description: Whether to show a login form when no localTestingSessionCookie is found}
+    - {name: 'user{id,email,firstName,lastName}', description: Kraken identity of the signed-in support user}
+    arguments_conditional:
+    - {name: accountNumber, placement: account apps}
+    - {name: deviceID, placement: device apps}
+  app_config_type:
+    source: https://github.com/kraken-tech/kraken-apps-examples/blob/main/src/types/app.ts
+    fields: [name, description, port, i18n.locales, i18n.defaultLocale, i18n.dateLocales,
+             i18n.currency, i18n.currencyReturnedInMinorUnit, homepageSlug, basename, linkBaseRoute,
+             APIProxyURL, defaultLanguage, isLoginRequired, appProxyJwt]
+network_requests:
+  gateway: Kraken App Store Proxy
+  isolation: >-
+    Apps run inside an iframe whose Content-Security-Policy sets connect-src to the Kraken App Proxy
+    only. An app cannot call any other origin directly.
+  required_headers:
+  - {name: X-Kraken-App-Proxy-Destination, description: Destination host to forward to}
+  - {name: X-Kraken-App-Proxy-Authorization, description: 'Bearer <appProxyJwt>'}
+  url_form: '${APIProxyURL}/${myEndpoint}  →  https://kraken-app-proxy.example.com/p/v1/example-app/external/endpoint/'
+  path_shape_observed: /p/v1/<app-slug>/<destination path>
+  note: The proxy has a single endpoint used to forward all requests.
+money_and_locale:
+  currency: Declared per app in AppConfig.i18n.currency (e.g. GBP)
+  minor_units:
+    field: i18n.currencyReturnedInMinorUnit
+    meaning: Boolean declaring whether the Kraken API returns currency amounts in minor units.
+    note: >-
+      This is the closest thing Kraken publishes to a money-representation convention for its API —
+      it is configurable per deployment rather than fixed, which implies both shapes occur.
+  i18n: i18next; locales and date-fns locales declared per app; defaultLanguage passed at init.
+versioning:
+  api: not published
+  packages: >-
+    Tako packages use semantic versioning with Changesets-generated release notes and numbered
+    migration guides (Tako React v16–v23 guides; Tako HTML v3–v4 guides). See
+    changelog/kraken-technologies-changelog.yml.
+  release_cadence_platform: >-
+    Kraken states "a software release every 10 minutes" (product updates page) and ">100 deployments
+    daily" (Trust Center) — continuous deployment, no version train exposed to consumers.
+pagination:
+  api_contract: not published
+  observed_indirectly: >-
+    The Tako React design system ships both Pagination/CursorPagination and Pagination/PagePagination
+    components, which indicates Kraken UIs consume both cursor-based and page-based pagination.
+    Recorded as an observation about the design system, NOT as an API contract.
+idempotency:
+  documented: false
+  header: null
+  note: >-
+    No Idempotency-Key header, retry contract or replay-safety guidance appears anywhere on Kraken's
+    public surface. No `Idempotency` pointer is emitted.
+error_envelope:
+  documented: false
+  note: No public error reference, problem-details media type, or error code registry.
+rate_limiting:
+  documented: false
+  note: >-
+    The only public rate-limit language is commercial: the AI access layer is advertised with "fair
+    usage included". No headers, quotas or limits are published. The Marketplace runs under a
+    separate fair-use policy in the signed access-and-use terms.
+request_tracing:
+  documented: false
+local_development:
+  harness: >-
+    The public example repo runs a Vite dev server on http://localhost:5173 and a json-server mock
+    API (api/server.js + db.json). The mock is a local stand-in, not a Kraken endpoint — Kraken
+    publishes no hosted sandbox.
+  test_session: localTestingSessionCookie (drives isLoginRequired in local mode)
+  guidance: 'Kraken advises deploying test apps to a client test environment first: "It''s generally a good idea to use your test environment to start!"'
+cross_links:
+  authentication: authentication/kraken-technologies-authentication.yml
+  components: components/kraken-technologies-components.yml
+  lifecycle: lifecycle/kraken-technologies-lifecycle.yml
+  conformance: conformance/kraken-technologies-conformance.yml

@@ -1,0 +1,51 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://github.com/octoenergy/homebrew-tap (README, kraken-cli.rb, ktdb-test.rb, ka-chow-cli.rb),
+  retrieved 2026-07-27
+summary: >-
+  Kraken Technologies operates a PUBLIC Homebrew tap (octoenergy/tap) that lists real first-party
+  command-line tools, but none of them is an API client and none can be installed from outside
+  Kraken's network. The formulae download from a private Nexus repository (nexus.ktl.net) and the
+  custom download strategy aborts unless Zscaler Private Access is connected, optionally presenting
+  a client certificate. This is internal platform-engineering tooling that happens to be packaged in
+  public, not a developer CLI for the Kraken API — so no `CLI` pointer is wired into apis.yml.
+public_install: false
+api_client: false
+tap:
+  name: octoenergy/tap
+  url: https://github.com/octoenergy/homebrew-tap
+  add: brew tap octoenergy/tap
+  install: brew install <package>
+  update: brew update && brew upgrade
+tools:
+- name: kraken-cli
+  binaries: [kraken, kraken-credentials]
+  version_seen: 0.48.4
+  description: 'Tools for Kraken Tech — "CLI tool to help Kraken developers work with AWS, Kubernetes, and other KTL services".'
+  homepage: https://github.com/octoenergy/kraken-cli/
+  source_repo_public: false
+  language: Python (installed into a virtualenv via uv)
+  distribution: https://nexus.ktl.net/repository/pypi-kraken-private/packages/kraken-cli/
+  dependencies: [aws-iam-authenticator, awscli, cryptography, docker-credential-helper-ecr, fzf,
+    kubernetes-cli, 'python@3.13', sops, uv, helm (recommended), k9s (recommended), kubectx
+    (recommended), stern (optional)]
+  shell_completions: 'generated from `kraken completion`'
+  help_entrypoint: kraken --help
+  getting_started_doc: 'Internal Notion page (notion.so/kraken-tech/...) — not publicly readable.'
+- name: ktdb
+  description: CLI tool to connect to KTL databases.
+  distribution: private Nexus
+- name: ka-chow-cli
+  description: A test bed for CLI development and release processes.
+  distribution: private Nexus
+access_gate:
+  network: Zscaler Private Access required — the formula checks https://ismyzscalerconnected.ktl.net and refuses to download otherwise.
+  client_certificate: 'Optional HOMEBREW_SSL_CLIENT_CERT is passed to curl as --cert/--key (mutual TLS to Nexus).'
+  registry: nexus.ktl.net (private PyPI repository pypi-kraken-private)
+  livecheck: https://nexus.ktl.net/service/rest/v1/search?repository=pypi-kraken-private&name=kraken-cli
+open_kraken_cli:
+  exists: false
+  note: >-
+    No CLI exists for Open Kraken APIs, events or the announced MCP AI access layer. There is no
+    published base URL for one to target.

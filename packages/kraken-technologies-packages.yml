@@ -1,0 +1,170 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  PyPI JSON API (https://pypi.org/pypi/<name>/json), npm registry
+  (https://registry.npmjs.org/), github.com/kraken-tech, github.com/octoenergy,
+  https://tako.kraken.tech/ and
+  https://github.com/kraken-tech/kraken-apps-examples/blob/main/package.json
+summary: >-
+  Kraken Technologies publishes no client library for the Kraken (Open Kraken) API — there is no
+  public base URL for one to target. What it does publish, first-party and verifiable, is (a) a set
+  of open-source Python/Django engineering libraries on PyPI under the octoenergy and kraken-tech
+  GitHub orgs, and (b) the Tako design-system packages, which are real and named in a public
+  package.json but are served from Kraken's PRIVATE npm registry and cannot be installed
+  anonymously. No package below is an API client, so no `SDKs` pointer is wired into apis.yml.
+api_client_libraries: 0
+official_open_source_libraries: 10
+private_registry_packages: 2
+packages:
+- language: python
+  registry: pypi
+  name: xocto
+  url: https://pypi.org/project/xocto/
+  source: https://github.com/octoenergy/xocto
+  version_seen: 10.0.0
+  install: pip install xocto
+  official: true
+  api_client: false
+  description: Kraken Technologies Python service utilities (ranges, events, storage, numbers, localtime).
+- language: python
+  registry: pypi
+  name: django-pg-migration-tools
+  url: https://pypi.org/project/django-pg-migration-tools/
+  source: https://github.com/kraken-tech/django-pg-migration-tools
+  version_seen: 0.1.26
+  install: pip install django-pg-migration-tools
+  official: true
+  api_client: false
+  description: Safer, more scalable Django migrations on PostgreSQL.
+- language: python
+  registry: pypi
+  name: django-integrity
+  url: https://pypi.org/project/django-integrity/
+  source: https://github.com/kraken-tech/django-integrity
+  version_seen: 0.2.0
+  install: pip install django-integrity
+  official: true
+  api_client: false
+  description: Refining Django IntegrityError handling and deferred database constraints.
+- language: python
+  registry: pypi
+  name: django-subatomic
+  url: https://pypi.org/project/django-subatomic/
+  source: https://github.com/kraken-tech/django-subatomic
+  version_seen: 1.0.0
+  install: pip install django-subatomic
+  official: true
+  api_client: false
+  description: Fine-grained database transaction control for Django.
+- language: python
+  registry: pypi
+  name: django-consistency-enforcer
+  url: https://pypi.org/project/django-consistency-enforcer/
+  source: https://github.com/kraken-tech/django-consistency-enforcer
+  version_seen: 0.5.1
+  install: pip install django-consistency-enforcer
+  official: true
+  api_client: false
+  description: Test-time enforcement of internal consistency in Django codebases.
+- language: python
+  registry: pypi
+  name: timezone-tools
+  url: https://pypi.org/project/timezone-tools/
+  source: https://github.com/kraken-tech/timezone-tools
+  version_seen: 0.1.0.post1
+  install: pip install timezone-tools
+  official: true
+  api_client: false
+  description: Tools for working with timezone-aware datetimes.
+- language: python
+  registry: pypi
+  name: rustfluent
+  url: https://pypi.org/project/rustfluent/
+  source: https://github.com/kraken-tech/python-rustfluent
+  version_seen: 0.1.0a8
+  install: pip install rustfluent
+  official: true
+  api_client: false
+  description: Python interface to the Rust Fluent localisation library.
+- language: python
+  registry: pypi
+  name: octotools
+  url: https://pypi.org/project/octotools/
+  source: https://github.com/octoenergy/octotools
+  version_seen: '1.0'
+  install: pip install octotools
+  official: true
+  api_client: false
+  description: Utilities for the UK energy market (MPAN/MPRN handling and similar) from the Kraken/Octopus lineage.
+- language: python
+  registry: pypi
+  name: terraform-cloud-client
+  url: https://pypi.org/project/terraform-cloud-client/
+  source: https://github.com/octoenergy/terraform-cloud-client
+  version_seen: 0.0.3
+  install: pip install terraform-cloud-client
+  official: true
+  api_client: false
+  description: API client for HashiCorp Terraform Cloud — a client for a THIRD-PARTY API, not for Kraken.
+- language: python
+  registry: pypi
+  name: timeserio
+  url: https://pypi.org/project/timeserio/
+  source: https://github.com/octoenergy/timeserio
+  version_seen: 0.10.4
+  install: pip install timeserio
+  official: true
+  api_client: false
+  description: Machine learning and forecasting tools for time series (energy load forecasting lineage).
+private_packages:
+- language: javascript
+  registry: private-npm
+  name: '@krakentech/tako'
+  url: https://tako.kraken.tech/
+  docs: https://tako-react-kraken-tech.vercel.app/?path=/docs/tako-react-introduction--docs
+  version_seen: 27.20.0
+  version_referenced_in_public_example: ^23.2.0
+  install: not publicly installable — private Kraken npm registry
+  official: true
+  api_client: false
+  public_registry_status: 'https://registry.npmjs.org/@krakentech/tako => 404'
+  access: >-
+    Read-only access token issued by Kraken; contact your Kraken Client Delivery Lead or email
+    tako@kraken.tech. Tokens expire annually and are rotated.
+  description: Tako React — accessible React/TypeScript component library styled with styled-components.
+- language: javascript
+  registry: private-npm
+  name: '@krakentech/tako-html'
+  url: https://tako.kraken.tech/
+  docs: https://tako-html-kraken-tech.vercel.app/?path=/docs/tako-html-introduction--docs
+  version_seen: 4.18.0
+  install: not publicly installable — private Kraken npm registry
+  official: true
+  api_client: false
+  access: Same private-registry token as '@krakentech/tako'.
+  description: Tako HTML — vanilla JS/jQuery/SCSS component library (HTMX-aware) for server-rendered Kraken UIs.
+homebrew:
+  tap: octoenergy/tap
+  url: https://github.com/octoenergy/homebrew-tap
+  public_tap: true
+  formulae: [kraken-cli, ktdb, ka-chow-cli]
+  note: >-
+    The tap is public but every formula downloads from the private Nexus repository at nexus.ktl.net
+    and the download strategy refuses to run unless Zscaler Private Access is connected. See
+    cli/kraken-technologies-cli.yml.
+not_found:
+- registry: npm
+  query: '@kraken-tech scope, @krakentech/tako, @octoenergy/tako'
+  result: no public package published under any Kraken scope (404)
+- registry: maven-central
+  result: no first-party Kraken Technologies artifact found
+- registry: nuget
+  result: none found
+- registry: rubygems
+  result: none found
+- registry: crates.io
+  result: none found
+- registry: packagist
+  result: none found
+- registry: pkg.go.dev
+  result: no first-party Go module found (the Go repos in the org are forks of third-party providers)

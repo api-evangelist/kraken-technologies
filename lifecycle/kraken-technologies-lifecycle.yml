@@ -1,0 +1,65 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://www.kraken.tech/product-updates, https://www.kraken.tech/legal/trust-center,
+  https://www.kraken.tech/vulnerability-disclosure-process, public Tako Storybooks, DNS/HTTP probes
+  2026-07-27
+summary: >-
+  Kraken publishes no API lifecycle policy: no versioning scheme, no deprecation or Sunset policy, no
+  public SLA and no public status page. What is published is a platform release posture (continuous
+  deployment, >100 deploys a day) and a semver + migration-guide discipline for the Tako design
+  system packages. No `StatusPage` and no `Deprecation` pointer is wired into apis.yml, because
+  neither exists.
+versioning:
+  api:
+    scheme: not published
+    current: null
+    docs: null
+  packages:
+    scheme: semver via Changesets
+    current:
+      '@krakentech/tako': 27.20.0
+      '@krakentech/tako-html': 4.18.0
+    migration_guides:
+      '@krakentech/tako': [v16, v17, v18, v19, v20, v21, v22, v23]
+      '@krakentech/tako-html': [v3, v4]
+    docs: https://tako.kraken.tech/
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: unknown
+  note: >-
+    No deprecation policy, Sunset/Deprecation header support (RFC 8594) or end-of-life schedule is
+    published for any Kraken surface. The only deprecation signal that exists publicly is the Tako
+    migration guides, which document breaking changes between major component-library versions.
+release_cadence:
+  platform_claim: '"With a software release every 10 minutes" (product updates page)'
+  trust_center_claim: '"Continuous deployment model enabling >100 deployments daily with automated security checks, regular updates and patching"'
+  consumer_visible_versions: none
+sla:
+  url: null
+  uptime_target: null
+  published: false
+  note: >-
+    Availability is one of the SOC 2 Type 2 trust services criteria Kraken reports against, but no
+    public SLA document or uptime target exists. Service levels sit inside the licence agreement.
+status_page:
+  url: null
+  found: false
+  probes:
+  - {host: status.kraken.tech, dns: NXDOMAIN, date: '2026-07-27'}
+  - {url: 'https://kraken.statuspage.io/', status: 200, note: 'belongs to Kraken.io (image optimisation) — a homonym, NOT Kraken Technologies'}
+  - {url: 'https://krakentech.statuspage.io/', status: 200, note: 'unclaimed — returns the generic Atlassian Statuspage marketing page'}
+  - {url: 'https://kraken-tech.statuspage.io/', status: 200, note: 'unclaimed — returns the generic Atlassian Statuspage marketing page'}
+incident_response:
+  documented: true
+  detail: >-
+    The Trust Center documents incident response procedures, a dedicated security operations team,
+    continuous monitoring and disaster recovery capabilities; the vulnerability disclosure page
+    commits to a 2-business-day first response and triage target. None of this is a public status
+    feed.
+  source: https://www.kraken.tech/legal/trust-center
+deprecated_operations: []
+support:
+  url: https://support.kraken.tech/
+  note: Pylon-hosted support portal shell; licensee support runs through the Client Delivery Lead.
