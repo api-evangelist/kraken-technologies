@@ -1,19 +1,16 @@
 generated: '2026-07-27'
 method: searched
-source: >-
-  https://tako-html-kraken-tech.vercel.app/?path=/docs/more-info-mcp--docs (Tako Storybook "More
-  Info/MCP" documentation page, retrieved 2026-07-27),
-  https://www.kraken.tech/press-releases/kraken-expands-open-kraken-with-ai-access-layer-and-marketplace,
+source: https://tako-html-kraken-tech.vercel.app/?path=/docs/more-info-mcp--docs (Tako Storybook "More
+  Info/MCP" documentation page, retrieved 2026-07-27), https://www.kraken.tech/press-releases/kraken-expands-open-kraken-with-ai-access-layer-and-marketplace,
   https://www.kraken.tech/open-kraken
-summary: >-
-  Kraken names MCP on two separate surfaces and only one of them is real today. The Open Kraken "AI
-  access layer" — MCP gateways that let a licensee's AI agents orchestrate approved actions inside
-  Kraken — is announced and "gradually released", with no server URL, no tool list, no scope model
-  and no transport published; mcp.kraken.tech does not resolve in DNS. The one MCP configuration
-  Kraken actually publishes is for its Tako design system: a documented, anonymously usable stdio
-  setup that points the community `storybook-mcp` server at Kraken's own PUBLIC Storybook index, so
-  an IDE assistant can read Tako component documentation while you code. That config is first-party
-  published and verified live; the server binary itself is third-party.
+summary: 'Kraken names MCP on two separate surfaces and only one of them is real today. The Open Kraken
+  "AI access layer" — MCP gateways that let a licensee''s AI agents orchestrate approved actions inside
+  Kraken — is announced and "gradually released", with no server URL, no tool list, no scope model and
+  no transport published; mcp.kraken.tech does not resolve in DNS. The one MCP configuration Kraken actually
+  publishes is for its Tako design system: a documented, anonymously usable stdio setup that points the
+  community `storybook-mcp` server at Kraken''s own PUBLIC Storybook index, so an IDE assistant can read
+  Tako component documentation while you code. That config is first-party published and verified live;
+  the server binary itself is third-party.'
 servers:
 - name: tako-storybook
   status: published
@@ -21,13 +18,20 @@ servers:
   first_party_server_binary: false
   transport: stdio
   command: npx
-  args: ['-y', 'storybook-mcp']
+  args:
+  - -y
+  - storybook-mcp
   env:
     STORYBOOK_URL: https://tako-react-kraken-tech.vercel.app/index.json
   alternate_env:
     STORYBOOK_URL: https://tako-html-kraken-tech.vercel.app/index.json
   auth: none — the Storybook index is served anonymously
-  clients_documented: [Cursor, JetBrains IDEs (IntelliJ IDEA, WebStorm, PyCharm), any MCP-capable IDE]
+  clients_documented:
+  - Cursor
+  - JetBrains IDEs (IntelliJ IDEA
+  - WebStorm
+  - PyCharm)
+  - any MCP-capable IDE
   docs: https://tako-html-kraken-tech.vercel.app/?path=/docs/more-info-mcp--docs
   data_source_verified:
     url: https://tako-react-kraken-tech.vercel.app/index.json
@@ -39,30 +43,38 @@ servers:
     status: 200
     entries: 231
     component_families: 26
-  scope: >-
-    Design-system documentation only. This server exposes Tako component stories and docs to a
-    coding assistant. It does NOT reach any Kraken tenant, customer record, or Open Kraken API.
-  tools_list_probe: >-
-    Not applicable — stdio server run locally by the IDE; there is no hosted endpoint to POST
-    tools/list to. Tool names come from the community `storybook-mcp` package, not from Kraken.
+  scope: Design-system documentation only. This server exposes Tako component stories and docs to a coding
+    assistant. It does NOT reach any Kraken tenant, customer record, or Open Kraken API.
+  tools_list_probe: Not applicable — stdio server run locally by the IDE; there is no hosted endpoint
+    to POST tools/list to. Tool names come from the community `storybook-mcp` package, not from Kraken.
 - name: open-kraken-ai-access-layer
   status: announced
   first_party_config: false
   transport: unpublished
   url: null
   auth: unpublished
-  verbatim: >-
-    "Build new AI applications and free your own AI agents to orchestrate approved actions across
-    Kraken with our AI access layer, built using MCP (fair usage included)."
+  verbatim: '"Build new AI applications and free your own AI agents to orchestrate approved actions across
+    Kraken with our AI access layer, built using MCP (fair usage included)."'
   docs: https://www.kraken.tech/open-kraken
   announcement: https://www.kraken.tech/press-releases/kraken-expands-open-kraken-with-ai-access-layer-and-marketplace
   probes:
-  - {host: mcp.kraken.tech, dns: NXDOMAIN, date: '2026-07-27'}
-  - {host: api.kraken.tech, dns: NXDOMAIN, date: '2026-07-27'}
-  note: >-
-    No tool list, inputSchema, scope model, gateway URL or availability date is published anywhere on
-    the public web. Nothing is derived or guessed here — access is licensee-only.
+  - host: mcp.kraken.tech
+    dns: NXDOMAIN
+    date: '2026-07-27'
+  - host: api.kraken.tech
+    dns: NXDOMAIN
+    date: '2026-07-27'
+  note: No tool list, inputSchema, scope model, gateway URL or availability date is published anywhere
+    on the public web. Nothing is derived or guessed here — access is licensee-only.
 tool_crosswalk: not-applicable
-tool_crosswalk_reason: >-
-  A crosswalk binds MCP tools to backing OpenAPI operationIds. Kraken publishes no OpenAPI and no
-  MCP tool list, so there is nothing to bind on either side.
+tool_crosswalk_reason: A crosswalk binds MCP tools to backing OpenAPI operationIds. Kraken publishes no
+  OpenAPI and no MCP tool list, so there is nothing to bind on either side.
+deployment:
+  mode: none
+  endpoint: https://tako-html-kraken-tech.vercel.app/?path=/docs/more-info-mcp--docs
+  verified: probed
+  probe: dead
+  note: the endpoint this manifest claimed did not answer; recorded as none rather than deleted so the
+    claim stays auditable
+  checked: '2026-08-12'
+  source: catalog MCP census
