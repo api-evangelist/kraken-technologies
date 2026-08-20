@@ -51,6 +51,12 @@ apis:
   - Energy
   - Utilities
   - Integration
+  - Event
+  - Embedded Apps
+  tags_raw:
+  - Energy
+  - Utilities
+  - Integration
   - Events
   - Embedded Apps
   properties:
