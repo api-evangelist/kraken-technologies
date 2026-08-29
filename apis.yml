@@ -17,6 +17,17 @@ description: >-
   published anywhere, the Tako design-system package requires a private npm token issued by email,
   and the Marketplace runs under signed access-and-use terms. There is no self-serve developer
   signup, no consumer data-portability API of its own, and no open market data.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.kraken.tech/favicon-96x96.png
 tags:
 - Energy
