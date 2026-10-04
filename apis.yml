@@ -19,14 +19,18 @@ description: >-
   signup, no consumer data-portability API of its own, and no open market data.
 deliveryModel:
   model: saas
-  open_source: false
+  license_evidence:
+    not_product:
+    - kraken-tech/kraken-apps-examples
+  open_source: unknown
   commercial: true
   callable_host: false
   label: Hosted service · you call their endpoint
-  confidence: medium
+  confidence: low
   source:
   - pricing
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: unknown
