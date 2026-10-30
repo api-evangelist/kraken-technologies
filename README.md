@@ -1,4 +1,4 @@
-# Kraken Technologies (kraken-technologies)
+# Kraken Technologies
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,100 +66,101 @@
 
 Kraken Technologies is the United Kingdom energy technology company behind Kraken, the licensed cloud operating system for utilities. Founded in 2016 inside Octopus Energy and spun out as an independent business, Kraken says it supports more than 90 million customer accounts for licensees including E.ON Next, EDF, Origin, Tokyo Gas, National Grid, Good Energy, Plenitude, Energy Queensland, Essential Energy, Portsmouth Water and TalkTalk across electricity, gas, water and broadband. It sits one layer behind the utility rather than in front of the consumer: it does not hold a supply licence, does not settle in the wholesale market and does not publish grid or market data, so the retailers and networks it powers carry the regulatory obligations, not Kraken. Its API posture matches that position and is honestly closed. The Open Kraken programme publicly advertises APIs, events, embedded apps, Flow automation and an MCP-based AI access layer, but every reference surface is gated: docs.kraken.tech forces SSO login on every path, no base URL or endpoint is published anywhere, the Tako design-system package requires a private npm token issued by email, and the Marketplace runs under signed access-and-use terms. There is no self-serve developer signup, no consumer data-portability API of its own, and no open market data.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/kraken-technologies/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/kraken-technologies/refs/heads/main/apis.yml)
+**Areas:** Energy · United Kingdom · Utilities · Electricity · Gas · Smart Metering · Demand Response · DER · Billing · Energy Platform
 
-## Tags
+## Kraken Technologies on APIs.io
 
-- Energy
-- United Kingdom
-- Utilities
-- Electricity
-- Gas
-- Smart Metering
-- Demand Response
-- DER
-- Billing
-- Energy Platform
+Everything profiled for Kraken Technologies is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kraken-technologies/](https://apis.io/providers/kraken-technologies/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (2)
 
-- **Created:** 2026-07-27
-- **Modified:** 2026-07-27
+- [Open Kraken APIs and Events](https://apis.io/apis/kraken-technologies/open-kraken-apis-and-events/) — Open Kraken is the integration layer of the Kraken utility operating system. Kraken publicly describes it as "APIs, events and MCP" for building apps and…
+- [Open Kraken AI Access Layer (MCP)](https://apis.io/apis/kraken-technologies/open-kraken-ai-access-layer-mcp/) — An AI access layer that Kraken announced as an expansion of Open Kraken, built using the Model Context Protocol and described as MCP gateways that let a…
 
-## APIs
+### Published properties
 
-### Open Kraken APIs and Events
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Open Kraken is the integration layer of the Kraken utility operating system. Kraken publicly describes it as "APIs, events and MCP" for building apps and experiences against data and capabilities inside Kraken and for bringing data in from a licensee's own apps and third-party tools, alongside the Flow drag-and-drop automation tool and Embedded Apps that render inside the Kraken agent desktop. No base URL, endpoint list, authentication scheme or machine-readable contract is published anywhere on the public web. The reference documentation at docs.kraken.tech returns an SSO login wall on every path probed on 2026-07-27, including `/openapi.json`, `/llms.txt` and `/.well-known/openid-configuration`, each of which redirects to `/auth/login/` and serves `text/html` rather than a spec. Access is available only to Kraken licensees and contracted partners.
+#### MCP servers (1)
 
-- **Human URL:** [https://www.kraken.tech/open-kraken](https://www.kraken.tech/open-kraken)
-- **Base URL:** none published
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [kraken-technologies-mcp.yml](https://apis.io/servers/kraken-technologies/kraken-technologies-mcp-yml/)
 
-- Energy
-- Utilities
-- Integration
-- Events
-- Embedded Apps
+#### Security (4)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://www.kraken.tech/open-kraken)
-- [Documentation](https://docs.kraken.tech/) — SSO-gated
-- [ChangeLog](https://www.kraken.tech/product-updates)
+- [Kraken Technologies Authentication](https://apis.io/security/kraken-technologies/kraken-technologies-authentication/)
+- [Kraken Technologies Domain Security](https://apis.io/security/kraken-technologies/kraken-technologies-domain-security/)
+- [Kraken Technologies Trust Center](https://apis.io/security/kraken-technologies/kraken-technologies-trust-center/)
+- [Kraken Technologies Vulnerability Disclosure](https://apis.io/security/kraken-technologies/kraken-technologies-vulnerability-disclosure/)
 
-### Open Kraken AI Access Layer (MCP)
+## Where to find this API
 
-An AI access layer that Kraken announced as an expansion of Open Kraken, built using the Model Context Protocol and described as MCP gateways that let a utility's own AI agents orchestrate approved actions across Kraken, with fair use included. Kraken states the layer is being gradually released. No MCP server URL, tool list, scope model or transport is published; a probe of `mcp.kraken.tech` on 2026-07-27 did not resolve. MCP is the only protocol Kraken names for this surface, and it is an agent-integration protocol rather than an energy data standard.
-
-- **Human URL:** [https://www.kraken.tech/open-kraken](https://www.kraken.tech/open-kraken)
-- **Base URL:** none published
-
-#### Tags
-
-- Energy
-- MCP
-- AI Agents
-- Utilities
-
-#### Properties
-
-- [Documentation](https://www.kraken.tech/open-kraken)
-- [Announcement](https://www.kraken.tech/press-releases/kraken-expands-open-kraken-with-ai-access-layer-and-marketplace)
-- [Documentation](https://docs.kraken.tech/) — SSO-gated
-
-## Regulatory Posture
-
-- **Mandate regime:** none — Kraken is a technology vendor, not a licensed supplier, network operator or accredited data recipient. Great Britain's Smart Energy Code / DCC obligations, Elexon's Balancing and Settlement Code and the Ofgem supply licence bind Kraken's licensees, not Kraken.
-- **Mandate status:** not-applicable. Kraken makes no public compliance claim, so there was no claim to downgrade.
-- **Australian CDR check:** the public CDR register (`GET https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary`, HTTP 200, 203 brands, 2026-07-27) returns zero Kraken entries, even though Origin Energy, Energy Queensland and Essential Energy run on Kraken.
-- **Data standard:** no standard reference found. No Green Button/ESPI, CDR Consumer Data Standards, OCPP/OCPI, OpenADR, IEEE 2030.5 or IEC CIM. The only protocol named is MCP.
-- **Consumer data API:** no. The consumer-facing Kraken-backed surface belongs to the licensee — see [developer.octopus.energy](https://developer.octopus.energy/), profiled separately as `octopus-energy`.
-- **Open market data:** no. Kraken operates no grid, market or emissions feed; in its home market those belong to NESO, Elexon and the DNOs.
-- **Access gate:** partner-only. A developer needs a Kraken licence or partner contract, then SSO credentials for docs.kraken.tech, then an emailed private-npm token from `tako@kraken.tech` to build Embedded Apps.
-- **Auth model:** not published. No API key format, OAuth2 flow, scope model or mTLS profile is documented anonymously.
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.kraken.tech/)
 - [Documentation](https://docs.kraken.tech/)
-- [Design System](https://tako.kraken.tech/)
-- [SDK](https://github.com/kraken-tech/kraken-apps-examples)
-- [GitHub Organization](https://github.com/kraken-tech)
-- [GitHub Organization](https://github.com/octoenergy)
-- [LinkedIn](https://www.linkedin.com/company/krakentech/)
+- [Support](https://support.kraken.tech/)
+- [Changelog](https://www.kraken.tech/product-updates)
 - [Blog](https://www.kraken.tech/insights)
-- [Press Releases](https://www.kraken.tech/press-releases)
-- [ChangeLog](https://www.kraken.tech/product-updates)
-- [Partners](https://www.kraken.tech/marketplace)
-- [Partner Program](https://www.kraken.tech/bpo-partner-program)
-- [Vulnerability Disclosure](https://www.kraken.tech/vulnerability-disclosure-process)
-- [Trust Center](https://www.kraken.tech/legal/trust-center)
-- [Terms of Service](https://www.kraken.tech/legal/marketplace-access-and-use-terms)
-- [Privacy Policy](https://www.kraken.tech/legal/privacy-notice)
+- [Security](https://www.kraken.tech/vulnerability-disclosure-process)
+- [Compliance](https://www.kraken.tech/legal/trust-center)
+- [Trust centre](https://www.kraken.tech/legal/trust-center)
+- [Terms of service](https://www.kraken.tech/legal/marketplace-access-and-use-terms)
+- [Privacy policy](https://www.kraken.tech/legal/privacy-notice)
+- [GitHub](https://github.com/kraken-tech)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 58.0 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 36.8 |
+
+**Agent readiness 2.5** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 32.8** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kraken-technologies/](https://apis.io/providers/kraken-technologies/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kraken Technologies: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kraken-technologies/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
